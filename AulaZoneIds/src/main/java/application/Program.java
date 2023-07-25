@@ -1,9 +1,7 @@
 package application;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 
 public class Program {
     public static void main(String[] args) {
@@ -30,6 +28,38 @@ public class Program {
 
         System.out.println("d05 hora: " + d05.getHour());
         System.out.println("d05 hora: " + d05.getMinute());
+
+        System.out.println("----AULA CÁLCULOS DATA-HORA----");
+
+        LocalDate pastweekLocalDate = d04.minusDays(7);
+        LocalDate nextweekLocalDate = d04.plusDays(7);
+
+        System.out.println("pastweekLocalDate = " + pastweekLocalDate);
+        System.out.println("nextweekLocalDate = "+ nextweekLocalDate);
+
+        LocalDateTime pastweekLocalDateTime = d05.minusDays(7);
+        LocalDateTime nextweekLocalDateTime = d05.plusDays(7);
+
+        System.out.println("pastweekLocalDateTime = " + pastweekLocalDateTime);
+        System.out.println("nextweekLocalDateTime = "+ nextweekLocalDateTime);
+
+        Instant pastweekInstant = d06.minus(7, ChronoUnit.DAYS);
+        Instant nextweekInstant = d06.plus(7, ChronoUnit.DAYS);
+
+        System.out.println("pastweekInstant = " + pastweekInstant);
+        System.out.println("nextweekInstant = " + nextweekInstant);
+
+        Duration t1 = Duration.between(pastweekLocalDate.atStartOfDay(), d04.atStartOfDay());
+        //não é possivel calcular o periodo de tempo entre dois LocalDate, temos que converter para LocalDateTime.
+        Duration t2 = Duration.between(pastweekLocalDateTime, d05);
+        Duration t3 = Duration.between(pastweekInstant, d06);
+        Duration t4 = Duration.between(d06, pastweekInstant); // calcula a data maior primeiro e a menor como segundo argumento
+
+
+        System.out.println("t1 dias = " + t1.toDays());
+        System.out.println("t2 dias = " + t2.toDays());
+        System.out.println("t3 dias = " + t3.toDays());
+        System.out.println("t4 dias = " + t4.toDays());
 
 
 
